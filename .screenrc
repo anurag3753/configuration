@@ -1,0 +1,66 @@
+shell -${SHELL}
+# Change default scrollback value for new windows
+layout autosave on
+
+# ===============================================================
+# # VARIABLES - Boolean values (on/off)
+# ===============================================================
+deflogin            off 
+hardcopy_append     on
+startup_message     off
+vbell               off
+
+# ===============================================================
+# # VARIABLES - Number values
+# ===============================================================
+defscrollback       10000
+silencewait         15
+
+# ===========================================
+# # CAPTION - shows a "caption" for the window.
+# ===========================================
+hardstatus alwayslastline
+#hardstatus string '%{= Kd} %{= Kd}%-w%{= Kr}[%{= KW}%n %t%{= Kr}]%{= Kd}%+w %-= %{KG} %D %M %d %C%A%{-}'
+hardstatus string "%{rk}%H %{gk}%c %{yk}%M%d %{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
+
+bind V screen -t 'vim' 0 vim
+bindkey -k k7 prev
+bindkey -k k8 next
+
+# SET DUMMY DISPLAY
+setenv DISPLAY ''
+
+# Screen Splitting and resizing
+bind = resize =
+bind + resize +20%
+bind - resize -20%
+bind _ resize max
+
+# For handling focus in split windows
+bind h focus left
+bind j focus down
+bind k focus up
+bind l focus right
+bind t focus top
+bind b focus bottom
+#caption string "%{= dd} "
+caption string "%{= dd} "
+sorendition "="
+
+# Create layouts
+## Default layouts
+layout new d
+select 1
+## For horizontal splits
+layout new h
+split
+focus down
+resize  -20%
+## For vertical splits
+layout new v
+split -v
+focus right
+resize -20%
+
+layout attach d
+layout select d

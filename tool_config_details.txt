@@ -1,0 +1,24 @@
+Purpose :- To log details of the manual steps done during my tools configuration
+
+    - vim_tree.png :- logs the plugin details for vim, apart from that we did below manual activities.
+            - powerline fonts :- https://github.com/powerline/fonts
+            - ph_header :- Python File header while writing python source code
+            - sh_header :- Shell file header while writing Shell source code
+            - We have also installed the shellcheck tool to check for shell syntax
+            - For airline :- check for official documentation first, using :h airline
+
+    - We have done some neat configuration in putty tool too. I now access putty using F1 key only
+            - Used ssh for putty, so no password is requested
+            - Configued username as `my_user_id` in putty configuration
+            - How to configure F1 key for putty :-
+                - Goto putty.exe, right click and create shortcut on desktop
+                - Open the shortcut and configure the properties file
+                - There mention keyboard shortcut as F1
+   
+    - How to save a configuration in putty:-
+            - Open the putty software, Do the configuration, then come to main window, select the Default Settings,
+              and then click on save
+            - I have attached screen shots of my putty configuration
+    
+
+    
