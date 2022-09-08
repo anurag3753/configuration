@@ -1,4 +1,5 @@
 ## bashrc settings
+alias size="ncdu $1"
 alias eb="exec bash"
 alias br="vi ~/.bashrc"
 alias vi="vim"
@@ -11,6 +12,7 @@ alias 4="cd ../../../../"
 alias 5="cd ../../../../../"
 alias 6="cd ../../../../../../"
 alias p="pwd"
+alias cur="Mention path till current dir"
 shopt -s autocd
 alias e="exit"
 alias tf="tail -f $1"
@@ -19,11 +21,20 @@ DATE=`date +%Y%m%d`
 # Disable Ctrl-s in teminal
 stty -ixon
 
+# colors!
+green="\[\033[0;32m\]"
+yellow="\[\033[0;33m\]"
+purple="\[\033[0;35m\]"
+reset="\[\033[0m\]"
+export PS1="$purple\u$yellow \W $ $reset\n:"
+
 ## Screen Shortcuts
 alias sl="screen -list"
 alias sc="screen -S $1"
 alias sr="screen -D -R $1"
-alias sk="screen -X -S $1 quit"
+alias sk='_(){ screen -X -S $1 quit; }; _'
+alias sn="screen -X screen"
+alias sr="screen -r daily"
 
 ## System Info
 alias os=' _(){ lsb_release -a; echo -n "32/64bit:"; arch; hostname; }; _'
@@ -60,7 +71,8 @@ alias gm=mail
 
 ## Daily Handy
 alias la="ls -a"
-alias ld="ls -d */" # show only directories
+alias ld=' _(){ ls -d */; `__fzf_cd__`; }; _' # show only directories
+alias lf=' _(){ vim -o `fzf`; }; _' # enable fzf open a file with vim
 alias per="stat -c '%A %a %n' $1"
 alias ascii="showkey -a"
 alias pss="ps -ef | grep $1"
@@ -75,17 +87,7 @@ alias ph="readlink -f $1"
 # Enable tab completion
 #source ~/git-completion.bash
 
-# colors!
-green="\[\033[0;32m\]"
-yellow="\[\033[0;33m\]"
-purple="\[\033[0;35m\]"
-reset="\[\033[0m\]"
-
-export PS1="$purple\u$yellow \W $ $reset\n:"
-
-# Basic run time setings
-conda deactivate
-clear
-alias sr="screen -r daily"
-# FIX: I tried to club screen layout shortcut using bash, but unable to do
-#alias lay='\e;^C; layout select $1'
+# PATH var
+export PATH=/home/anuragmodi/ripgrep/target/release:$PATH
+# Fuzzy Dir Search
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
