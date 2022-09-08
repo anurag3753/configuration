@@ -1,5 +1,8 @@
 Purpose :- To log details of the manual steps done during my tools configuration
 
+        - ripgrep tool
+        - fzf (fuzzy dir search)
+
         - vim_tree.png :- logs the plugin details for vim, apart from that we did below manual activities.
                 - powerline fonts :- https://github.com/powerline/fonts
                 - ph_header :- Python File header while writing python source code
