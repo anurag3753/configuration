@@ -20,7 +20,6 @@ Plugin 'scrooloose/syntastic'
 "auto-completion stuff
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
-
 " tabular navigation
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -37,8 +36,13 @@ Plugin 'tmhedberg/SimpylFold'
 " easy motion
 Plugin 'easymotion/vim-easymotion'
 
-call vundle#end()
+" silver searcher
+Plugin 'mileszs/ack.vim'
 
+" web-dev plugin
+Plugin 'mattn/emmet-vim'
+
+call vundle#end()
 filetype plugin indent on    " enables filetype detection
 filetype plugin on
 let mapleader=" "            " default leader is mapped to <space> key
@@ -84,20 +88,36 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 let NERDTreeIgnore=['\.pyc$', '\~$', '^__pycache__$'] "ignore files in NERDTree
 
+" CTRL-P Mappings
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.cache*,*/__pycache__/*     " MacOSX/Linux
+
+" To clear cache run :-  :CTRLPCLEARALLCACHES
+" PRESS F5 to refresh caches
+" rm -rf ~/.cache/ctrlp/
+let g:ctrlp_clear_cache_on_exit = 0
+
 "I don't like swap files
 set noswapfile
+" It allows us to highlight the words found when we do search(/)
+set hlsearch
 
 " turn hybrid line numbers on
-set nu rnu
+" set nu rnu
 
 "------------Start Python PEP 8 stuff----------------
 " Number of spaces that a pre-existing tab is equal to.
-au BufRead,BufNewFile *py,*pyw,*.c,*.h set tabstop=4
+au BufRead,BufNewFile *py,*pyw,*.c,*.h,*.sh,*.tcl set tabstop=4
 
 "spaces for indents
-au BufRead,BufNewFile *.py,*pyw set shiftwidth=4
-au BufRead,BufNewFile *.py,*.pyw set expandtab
-au BufRead,BufNewFile *.py set softtabstop=4
+au BufRead,BufNewFile *.py,*pyw,*.sh,*.tcl,*.yaml,*.json set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw,*.sh,*.tcl,*.yaml,*.json set expandtab
+au BufRead,BufNewFile *.py,*.sh,*.tcl,*.yaml,*.json set softtabstop=4
 
 " Use the below highlight group when displaying bad whitespace is desired.
 highlight BadWhitespace ctermbg=red guibg=red
@@ -133,12 +153,32 @@ set backspace=indent,eol,start
 
 " Easily create new files, just like other editors
 nnoremap <C-t> :tabnew<CR>
-nnoremap <C-h> gt
-nnoremap <C-l> gT
+nnoremap <C-h> gT
+nnoremap <C-l> gt
 nnoremap <C-S-t> :tabnew#<CR>
 
 nnoremap ,p :set paste
 nnoremap ,pyt :-1read $HOME/.vim/header_templates/py_header<CR>
 nnoremap ,sht :-1read $HOME/.vim/header_templates/sh_header<CR>
+nnoremap ,tclt :-1read $HOME/.vim/header_templates/tcl_header<CR>
+let @x='3j5weldt]'
+let @r='jb.'
 nnoremap <F6> :NERDTreeToggle<CR>
 nnoremap ,trim :%s/\s\+$//e
+nnoremap ,/ :noh<CR>
+nnoremap ,sh :new<bar>0read ! 
+autocmd FileType python nnoremap <buffer> <F9> :update<bar> !python3 %<CR>
+set tags=tags
+set colorcolumn=80
+" Disable Arrow keys in Normal mode
+"map <up> <nop>
+"map <up> 10<C-w>+
+"map <down> <C-w>=
+"map <left> <nop>
+"map <right> <nop>
+
+" Disable Arrow keys in Insert mode
+"imap <up> <nop>
+"imap <down> <nop>
+"imap <left> <nop>
+"imap <right> <nop>
