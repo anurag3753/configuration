@@ -1,0 +1,8 @@
+# All steps to be performed at the root of the project
+cd project
+pip install -r requirements-dev.txt
+touch .pre-commit-config.yaml
+Put all required hooks in .pre-commit-config.yaml
+pre-commit install (It will install the pre-commit git hook into the git repository)
+git add .pre-commit-config.yaml
+git commit -m "Initial commit"      # It should trigger your git hook
